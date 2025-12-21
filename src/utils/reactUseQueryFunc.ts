@@ -1,5 +1,5 @@
 "use client";
-import { UserSchema } from "./zodSchemas";
+import { UserSchema } from "./zodSchemas/UserSchema";
 
 // funkcja zewnętrzna służąca do obsługiwania fetchu
 export async function QueryFetch(url: string, options: object) {

@@ -13,5 +13,8 @@ export function useStringKeys(amount?: number) {
     userCount: t('userCount', {count: amount}),
     errorOccurred: t('errorOccurred'),
     loading: t('loading'),
+    login: t('login'),
+    loginSubmit: t('loginSubmit'),
+    password: t('password')
   };
 }
