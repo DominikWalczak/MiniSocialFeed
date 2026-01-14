@@ -1,51 +1,40 @@
 "use client";
 
-import { useStringKeys } from '@/src/i18n/i18nKeys';
-import { validationMiddleware } from '@/src/middlewares/validation.middleware';
+import { useTranslation } from 'react-i18next';
 import { mutationFunction } from '@/src/utils/reactUseMutationFunc';
-import { UseMutationSchema } from '@/src/utils/zodSchemas/UseMutationSchema';
+import { UseMutationType } from '@/src/utils/zodSchemas/UseMutationSchema';
 import { useMutation } from '@tanstack/react-query';
-import React, {useState} from 'react'
+import { useForm } from 'react-hook-form';
+
+type LoginForm = {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-    })
+    const { t } = useTranslation();
 
-    const stringKeys = useStringKeys();
-
-    function handleSubmit(e: React.FormEvent){
-        console.log(form.email, form.password);
-        e.preventDefault();
-
-        loginMutation.mutate();
-        alert(form.email + form.password);
-    }
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
-        const {name, value } = e.target;
-        setForm((prev) => ({ ...prev, [name]: value }));
-    }
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>({
+      defaultValues: { email: '', password: '' }
+    });
 
     const loginMutation = useMutation({
-        mutationFn: async () => {
-          const result = validationMiddleware(UseMutationSchema, {
+        mutationFn: async (formData: LoginForm) => {
+          const result: UseMutationType = {
             url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, 
               options: {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }, 
                 body: JSON.stringify({
-                  email: form.email,
-                  password: form.password
+                  email: formData.email,
+                  password: formData.password
                 })
               }
             }
-          )
+          
 
           return await mutationFunction(result);
         },
-        
         onSuccess: (data) => {
           console.log(data);
         },
@@ -54,34 +43,34 @@ const Login = () => {
         }
     })
 
+    function onSubmit(data: LoginForm){
+        loginMutation.mutate(data);
+    }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md text-black">
-        <h1 className='text-2xl font-bold mb-4'>{stringKeys.login}</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <h1 className='text-2xl font-bold mb-4'>{t('login')}</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium">Email</label>
           <input
             type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
+            {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+\.\S+$/, message: 'Invalid email' } })}
             className="w-full p-2 border rounded shadow-sm"
-            required
           />
+          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium">{stringKeys.password}</label>
+          <label className="block text-sm font-medium">{t('password')}</label>
           <input
             type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
+            {...register('password', { required: 'Password is required', minLength: { value: 1, message: 'Password is required' } })}
             className="w-full p-2 border rounded shadow-sm"
-            required
           />
+          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
         </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit'>{stringKeys.loginSubmit}</button>
+            <button disabled={isSubmitting || loginMutation.status === 'pending'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit'>{t('loginSubmit')}</button>
         </form>
     </div>
   )
