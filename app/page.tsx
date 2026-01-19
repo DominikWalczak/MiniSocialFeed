@@ -16,6 +16,9 @@ export default function Page() {
       <div>
         <Link className="m-3 bg-amber-100 hover:bg-amber-200 text-black font-bold py-2 px-4 rounded" href="/login">login</Link>
       </div>
+      <div>
+        <Link className="m-3 bg-amber-100 hover:bg-amber-200 text-black font-bold py-2 px-4 rounded" href="/post">posts</Link>
+      </div>
     </div>
   );
 }
