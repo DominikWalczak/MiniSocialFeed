@@ -2,18 +2,22 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { QueryFetch } from "@/src/utils/reactUseQueryFunc"
+import Cookies from "js-cookie";
 import { BACKEND_URL } from "@/env";
 import { useTranslation } from "react-i18next";
 import { UserSchema } from "@/src/utils/zodSchemas/UserSchema";
 
 const User = () => {
+
+  // uzyskuję dostęp do AccessTokenu przekazanego z Backendu
+  const token = Cookies.get("accessToken");
   // do fetchu wykorzystuję funkcję QueryFetch 
   const { data, isLoading, isError, refetch } = useQuery({ 
   queryKey: ['user'],
   queryFn: () => QueryFetch(`${BACKEND_URL}/user/me/1`, { method: "GET", 
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer xxxxxxxxxxx.xxxxxxxxxxxxx.xxxxxxxxxxxxxxx` 
+      "Authorization": `Bearer ${token}` 
     },
   }, UserSchema),
   enabled: true
@@ -25,7 +29,6 @@ const User = () => {
 
   return (
     <div>
-      <h1>{t('userCount')}</h1>
       {/* Wczytuję wszystkie elementy przekazanych danych */}
         <p>{data?.name}, {data?.email}</p>
     </div>

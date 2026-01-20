@@ -13,3 +13,16 @@ export const PostItemSchema = z.array(z.object({
 }))
 
 export type PostItemType = z.infer<typeof PostItemSchema>;
+
+export const LoginDataSchema = z.object({
+    data: z.object({
+        accessToken: z.string(),
+        refreshToken: z.string(),
+        user: z.object({
+            email: z.string(),
+        }),
+    }),
+    message: z.string()
+})
+
+export type LoginDataType = z.infer<typeof LoginDataSchema>;

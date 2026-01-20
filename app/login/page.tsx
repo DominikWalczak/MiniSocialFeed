@@ -1,10 +1,12 @@
 "use client";
 
 import { useTranslation } from 'react-i18next';
+import Cookies from 'js-cookie';
 import { mutationFunction } from '@/src/utils/reactUseMutationFunc';
 import { UseMutationType } from '@/src/utils/zodSchemas/UseMutationSchema';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { LoginDataSchema, LoginDataType } from '@/src/utils/zodSchemas/Schema';
 
 type LoginForm = {
   email: string;
@@ -35,8 +37,23 @@ const Login = () => {
 
           return await mutationFunction(result);
         },
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: (data: LoginDataType) => {
+          const dataCheck = LoginDataSchema.safeParse(data);
+
+          if (!dataCheck.success) {
+            throw {
+            error: "Invalid data",
+              details: dataCheck.error.issues.map(i => ({
+                  path: i.path.join('.'),
+                  message: i.message,
+                  code: i.code,
+              })),
+            }
+          }
+
+          Cookies.set("accessToken", dataCheck.data.data.accessToken, { expires: 7 });
+
+          Cookies.set("refreshToken", dataCheck.data.data.refreshToken, { expires: 7 });
         },
         onError: (error) => {
           console.log(error);
