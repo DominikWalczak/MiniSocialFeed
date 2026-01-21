@@ -2,7 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
-import { mutationFunction } from '@/src/utils/reactUseMutationFunc';
+import { mutationFunction } from '@/src/utils/extractedFunctions';
 import { UseMutationType } from '@/src/utils/zodSchemas/UseMutationSchema';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';

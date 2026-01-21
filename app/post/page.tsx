@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
-import { QueryFetch } from "@/src/utils/reactUseQueryFunc"
+import { QueryFetch } from "@/src/utils/extractedFunctions"
 import { BACKEND_URL } from "@/env";
 import { useTranslation } from "react-i18next";
 

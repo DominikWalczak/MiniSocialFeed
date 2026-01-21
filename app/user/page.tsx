@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { QueryFetch } from "@/src/utils/reactUseQueryFunc"
+import { QueryFetch } from "@/src/utils/extractedFunctions"
 import Cookies from "js-cookie";
 import { BACKEND_URL } from "@/env";
 import { useTranslation } from "react-i18next";
