@@ -51,6 +51,8 @@ const Login = () => {
             }
           }
 
+          Cookies.set("id", dataCheck.data.data.user.id.toString(), { expires: 7 });
+
           Cookies.set("accessToken", dataCheck.data.data.accessToken, { expires: 7 });
 
           Cookies.set("refreshToken", dataCheck.data.data.refreshToken, { expires: 7 });

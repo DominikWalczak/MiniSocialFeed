@@ -11,10 +11,11 @@ const User = () => {
 
   // uzyskuję dostęp do AccessTokenu przekazanego z Backendu
   const token = Cookies.get("accessToken");
+  const id = Cookies.get("id");
   // do fetchu wykorzystuję funkcję QueryFetch 
   const { data, isLoading, isError, refetch } = useQuery({ 
   queryKey: ['user'],
-  queryFn: () => QueryFetch(`${BACKEND_URL}/user/me/1`, { method: "GET", 
+  queryFn: () => QueryFetch(`${BACKEND_URL}/user/me/${id}`, { method: "GET", 
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}` 
