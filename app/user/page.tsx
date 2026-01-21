@@ -31,7 +31,7 @@ const User = () => {
   return (
     <div>
       {/* Wczytuję wszystkie elementy przekazanych danych */}
-        <p>{data?.name}, {data?.email}</p>
+        <p>{data?.vorname} {data?.name}, {data?.email}</p>
     </div>
   )
 }
