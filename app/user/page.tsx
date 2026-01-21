@@ -5,7 +5,7 @@ import { QueryFetch } from "@/src/utils/extractedFunctions"
 import Cookies from "js-cookie";
 import { BACKEND_URL } from "@/env";
 import { useTranslation } from "react-i18next";
-import { UserSchema } from "@/src/utils/zodSchemas/UserSchema";
+import { UserSchema } from "@/src/utils/zodSchemas/Schema";
 
 const User = () => {
 

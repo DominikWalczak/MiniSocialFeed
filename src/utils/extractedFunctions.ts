@@ -1,4 +1,5 @@
 import { z, ZodType} from "zod";
+import { UseMutationType } from "./zodSchemas/Schema";
 
 // funkcja zewnętrzna służąca do obsługiwania fetchu
 export async function QueryFetch<T>(url: string, options: object, schema: ZodType<T>): Promise<T> {
@@ -24,4 +25,16 @@ export async function QueryFetch<T>(url: string, options: object, schema: ZodTyp
     console.log("QueryFetch error: " + error);
     throw error;
   }
+}
+
+export async function mutationFunction(object: UseMutationType) {
+    
+    const result = await fetch(object.url, object.options);
+
+    if (!result.ok) {
+        const error = await result.json().catch(() => ({}));
+        throw error;
+    }
+
+    return result.json();
 }
