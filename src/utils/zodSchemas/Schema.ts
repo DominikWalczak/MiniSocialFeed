@@ -1,9 +1,11 @@
 import { z } from "zod";
 
 export const UserSchema = z.object({
-    email: z.string().email().min(5),
-    password: z.string().min(1),
-});
+    name: z.string(),
+    vorname: z.string(),
+    email: z.string().email(),
+})
+
 
 export const PostItemSchema = z.array(z.object({
     id: z.number(),
@@ -27,3 +29,15 @@ export const LoginDataSchema = z.object({
 })
 
 export type LoginDataType = z.infer<typeof LoginDataSchema>;
+
+export const UseMutationSchema = z.object({
+  url: z.string().url("Niepoprawny format adresu URL").min(1, "URL jest wymagany"),
+  
+  options: z.object({
+    method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]).optional(),
+    headers: z.record(z.string(), z.string()).optional(),
+    body: z.string().optional(),
+  }).optional()
+});
+
+export type UseMutationType = z.infer<typeof UseMutationSchema>;
