@@ -7,7 +7,7 @@ export default function Page() {
   const { t } = useTranslation();
   return (
     <div className="flex -mx-2">
-      <div className="bg-amber-950 text-4xl font-bond">
+      <div className="bg-amber-950 text-4xl font-bold">
         {t('helloWorld')}
       </div>
       <div>

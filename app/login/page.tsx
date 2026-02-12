@@ -3,6 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { mutationFunction } from '@/src/utils/extractedFunctions';
+import { useRouter } from 'next/router'
 import { UseMutationType } from '@/src/utils/zodSchemas/Schema';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -12,6 +13,8 @@ type LoginForm = {
   email: string;
   password: string;
 }
+
+const router = useRouter();
 
 const Login = () => {
     const { t } = useTranslation();
@@ -56,9 +59,11 @@ const Login = () => {
           Cookies.set("accessToken", dataCheck.data.data.accessToken, { expires: 7 });
 
           Cookies.set("refreshToken", dataCheck.data.data.refreshToken, { expires: 7 });
+
+          router.push('/post')
         },
         onError: (error) => {
-          console.log(error);
+          console.error(error);
         }
     })
 
@@ -69,6 +74,11 @@ const Login = () => {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md text-black">
         <h1 className='text-2xl font-bold mb-4'>{t('login')}</h1>
+        {loginMutation.isError && (
+          <div className="text-red-500 text-sm mt-1">
+            {loginMutation.error.message}
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium">Email</label>

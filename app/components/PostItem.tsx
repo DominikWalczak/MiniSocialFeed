@@ -11,7 +11,7 @@ const PostItem = ({ data }: { data: PostItemType }) => {
       {data.map((post) => (
         <div key={post.id} className="w-full bg-[rgb(33,113,181)] rounded-3xl shadow-[rgb(33,113,181)] p-6">
           <div>{t('AuthorsId')}: {post.authorId}</div>
-          <div>{t('CreatedAt')}: {post.createdAt}</div>
+          <div>{t('CreatedAt')}: {new Date(post.createdAt).toLocaleDateString('pl-PL')}</div>
           <div>{t('PostContent')}: {post.content}</div>
         </div>
     ))}
