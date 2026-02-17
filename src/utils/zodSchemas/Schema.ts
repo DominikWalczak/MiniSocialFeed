@@ -7,14 +7,18 @@ export const UserSchema = z.object({
 })
 
 
-export const PostItemSchema = z.array(z.object({
+export const PostItemSchema = z.object({
     id: z.number(),
     authorId: z.number(),
     content: z.string(),
     createdAt: z.string().datetime(),
-}))
+})
+
+export const PostListSchema = z.array(PostItemSchema);
 
 export type PostItemType = z.infer<typeof PostItemSchema>;
+
+export type PostListType = z.infer<typeof PostListSchema>;
 
 export const LoginDataSchema = z.object({
     data: z.object({
