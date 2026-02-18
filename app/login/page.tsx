@@ -3,7 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { mutationFunction } from '@/src/utils/extractedFunctions';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { UseMutationType } from '@/src/utils/zodSchemas/Schema';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -14,62 +14,62 @@ type LoginForm = {
   password: string;
 }
 
-const router = useRouter();
-
 const Login = () => {
-    const { t } = useTranslation();
+  const router = useRouter();
 
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>({
-      defaultValues: { email: '', password: '' }
-    });
+  const { t } = useTranslation();
 
-    const loginMutation = useMutation({
-        mutationFn: async (formData: LoginForm) => {
-          const result: UseMutationType = {
-            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, 
-              options: {
-                method: "POST",
-                headers: { "Content-Type": "application/json" }, 
-                body: JSON.stringify({
-                  email: formData.email,
-                  password: formData.password
-                })
-              }
-            }
-          
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>({
+    defaultValues: { email: '', password: '' }
+  });
 
-          return await mutationFunction(result);
-        },
-        onSuccess: (data: LoginDataType) => {
-          const dataCheck = LoginDataSchema.safeParse(data);
-
-          if (!dataCheck.success) {
-            throw {
-            error: "Invalid data",
-              details: dataCheck.error.issues.map(i => ({
-                  path: i.path.join('.'),
-                  message: i.message,
-                  code: i.code,
-              })),
+  const loginMutation = useMutation({
+      mutationFn: async (formData: LoginForm) => {
+        const result: UseMutationType = {
+          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, 
+            options: {
+              method: "POST",
+              headers: { "Content-Type": "application/json" }, 
+              body: JSON.stringify({
+                email: formData.email,
+                password: formData.password
+              })
             }
           }
+        
 
-          Cookies.set("id", dataCheck.data.data.user.id.toString(), { expires: 7 });
+        return await mutationFunction(result);
+      },
+      onSuccess: (data: LoginDataType) => {
+        const dataCheck = LoginDataSchema.safeParse(data);
 
-          Cookies.set("accessToken", dataCheck.data.data.accessToken, { expires: 7 });
-
-          Cookies.set("refreshToken", dataCheck.data.data.refreshToken, { expires: 7 });
-
-          router.push('/post')
-        },
-        onError: (error) => {
-          console.error(error);
+        if (!dataCheck.success) {
+          throw {
+          error: "Invalid data",
+            details: dataCheck.error.issues.map(i => ({
+                path: i.path.join('.'),
+                message: i.message,
+                code: i.code,
+            })),
+          }
         }
-    })
 
-    function onSubmit(data: LoginForm){
-        loginMutation.mutate(data);
-    }
+        Cookies.set("id", dataCheck.data.data.user.id.toString(), { expires: 7 });
+
+        Cookies.set("accessToken", dataCheck.data.data.accessToken, { expires: 7 });
+
+        Cookies.set("refreshToken", dataCheck.data.data.refreshToken, { expires: 7 });
+
+        router.push('/post')
+      },
+      onError: (error) => {
+        console.error(error);
+      }
+  })
+
+  function onSubmit(data: LoginForm){
+      loginMutation.mutate(data);
+  }
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md text-black">

@@ -7,8 +7,8 @@ import { BACKEND_URL } from "@/env";
 import { useTranslation } from "react-i18next";
 
 
-import PostItem from "../components/PostItem";
-import { PostItemSchema } from "@/src/utils/zodSchemas/Schema";
+import { PostItemSchema, PostListSchema } from "@/src/utils/zodSchemas/Schema";
+import PostList from "../components/post/PostList";
 
 
 const PostSite = () => {
@@ -22,7 +22,7 @@ const PostSite = () => {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}` 
     },
-  }, PostItemSchema),
+  }, PostListSchema),
   enabled: true
   });
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ const PostSite = () => {
   if (data) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-          <PostItem data={data}/>
+          <PostList data={data}/>
       </div>
     )
   }
