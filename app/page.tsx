@@ -2,6 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import Button from "./components/ui/Button"
 
 export default function Page() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ export default function Page() {
       <div>
         <Link className="m-3 bg-amber-100 hover:bg-amber-200 text-black font-bold py-2 px-4 rounded" href="/post">posts</Link>
       </div>
+        <Button data={{variant: "danger", size: "sm", isLoading: true, disabled: false,}}/>
     </div>
   );
 }
