@@ -71,3 +71,10 @@ export const AvatarSchema = z.object({
 });
 
 export type AvatarType = z.infer<typeof AvatarSchema>;
+
+export const AlertSchema = z.object({
+    type: z.enum(["success", "error", "info"]),
+    text: z.string()
+});
+
+export type AlertType = z.infer<typeof AlertSchema>;

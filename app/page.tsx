@@ -4,11 +4,13 @@ import Avatar from "./components/ui/Avatar";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import Button from "./components/ui/Button"
+import Input from "./components/ui/Input";
+import Alert from "./components/ui/Alert";
 
 export default function Page() {
   const { t } = useTranslation();
   return (
-    <div className="flex -mx-2">
+    <div className="m-2">
       <div className="bg-amber-950 text-4xl font-bold">
         {t('helloWorld')}
       </div>
@@ -23,6 +25,8 @@ export default function Page() {
       </div>
         <Button data={{variant: "danger", size: "sm", content: "Button", isLoading: true, disabled: false,}}/>
         <Avatar data={{size: "sm", name: "Dominik", vorname: "Walczak"}}/>
+        {/* <Input id="2" label="Adres email"/> */}
+        <Alert data={{text: "text", type: "success"}} onClose={()=>{}}/>
     </div>
   );
 }
