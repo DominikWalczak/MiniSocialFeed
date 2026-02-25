@@ -9,5 +9,10 @@
   "password": "Password",
   "AuthorsId": "Author's Id ",
   "CreatedAt": "Posted at ",
-  "PostContent": "Content "
+  "PostContent": "Content ",
+  "like": "Like",
+  "comment": "Comment",
+  "feed": "Feed",
+  "profile": "Profile",
+  "logout": "Log out"
 }

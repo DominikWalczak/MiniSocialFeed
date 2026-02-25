@@ -9,5 +9,10 @@
   "password": "Hasło",
   "AuthorsId": "Identyfikator Autora ",
   "CreatedAt": "Opublikowane ",
-  "PostContent": "Treść "
+  "PostContent": "Treść ",
+  "like": "Lubię to",
+  "comment": "Komentuj",
+  "feed": "Strona Główna",
+  "profile": "Profil",
+  "logout": "Wyloguj się"
 }

@@ -32,7 +32,7 @@ const PostSite = () => {
     
   if (data) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex m-2 min-h-screen items-center justify-center">
           <PostList data={data}/>
       </div>
     )
