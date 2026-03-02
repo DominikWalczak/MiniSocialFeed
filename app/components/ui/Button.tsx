@@ -8,9 +8,9 @@ const Button = ({ data }: { data:  ButtonType}) => {
   const { t } = useTranslation();
 
   const color = {
-    primary: "bg-[rgb(8,81,156)] hover:bg-[rgb(8,81,156)]/70 active:bg-[rgb(8,81,156)]/50", 
-    secondary: "bg-[rgb(33,113,181)] hover:bg-[rgb(33,113,181)]/70 active:bg-[rgb(33,113,181)]/50", 
-    danger: "bg-red-400 hover:bg-bg-red-500  active:bg-red-600"
+    primary: "bg-primary hover:bg-primary-dark active:bg-primary-dark/80", 
+    secondary: "bg-secondary hover:bg-secondary/80 active:bg-secondary-light", 
+    danger: "bg-error-warning hover:bg-bg-error-warning  active:bg-error-warning"
   };
   const sizes = {
     sm: {
@@ -39,6 +39,7 @@ const Button = ({ data }: { data:  ButtonType}) => {
         ${currentSize.padding} 
         ${currentSize.fontSize} 
         ${currentColor} 
+        hover:shadow-md transition-shadow
         rounded-2xl transition-all duration-500 
         flex items-center justify-center
         disabled:opacity-50 disabled:cursor-not-allowed

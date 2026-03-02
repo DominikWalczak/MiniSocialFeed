@@ -27,6 +27,9 @@ export default function Page() {
         <Avatar data={{size: "sm", name: "Dominik", vorname: "Walczak"}}/>
         {/* <Input id="2" label="Adres email"/> */}
         <Alert data={{text: "text", type: "success"}} onClose={()=>{}}/>
+        <div className="bg-error-warning text-text-primary-black">
+          dasdasd
+        </div>
     </div>
   );
 }

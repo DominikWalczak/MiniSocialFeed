@@ -6,7 +6,7 @@ import PostItem from "./PostItem";
 const PostList = ({ data }: { data: PostListType }) => {
 
   return (
-    <div className="bg-[rgb(8,81,156)] text-[rgb(236,231,242)] w-xl flex flex-col items-center justify-center p-10 gap-3 rounded-3xl">
+    <div className="bg-primary text-[rgb(236,231,242)] w-xl flex flex-col items-center justify-center p-10 gap-3 rounded-3xl">
       {data.map((post) => (<PostItem key={post.id} post={post}/>))}
     </div>
   )

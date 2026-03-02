@@ -16,7 +16,7 @@ const Alert = ({ data, onClose }: { data: AlertType; onClose?: () => void }) => 
       {onClose && (
         <button 
           onClick={onClose}
-          className="ml-4 hover:opacity-70 transition-opacity"
+          className="ml-4 hover:opacity-70 transition-opacity cursor-pointer"
           aria-label="Close"
         >
           <X size={18} />
