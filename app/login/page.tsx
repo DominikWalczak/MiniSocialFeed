@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { UseMutationType } from '@/src/utils/zodSchemas/Schema';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import Button from '../components/ui/Button';
 import { LoginDataSchema, LoginDataType } from '@/src/utils/zodSchemas/Schema';
 
 type LoginForm = {
@@ -99,7 +100,8 @@ const Login = () => {
           />
           {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
         </div>
-            <button disabled={isSubmitting || loginMutation.status === 'pending'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit'>{t('loginSubmit')}</button>
+          <Button data={{variant: "primary", size: "sm", content: "Zaloguj się", isLoading: false, disabled: false,}}/>
+          {/* <button disabled={isSubmitting || loginMutation.status === 'pending'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type='submit'>{t('loginSubmit')}</button> */}
         </form>
     </div>
   )

@@ -39,8 +39,8 @@ const Button = ({ data }: { data:  ButtonType}) => {
         ${currentSize.padding} 
         ${currentSize.fontSize} 
         ${currentColor} 
-        hover:shadow-md transition-shadow
-        rounded-2xl transition-all duration-500 
+        hover:shadow-md transition-shadow font-bold text-text-primary
+        rounded-sm transition-all duration-500 
         flex items-center justify-center
         disabled:opacity-50 disabled:cursor-not-allowed
       `}
