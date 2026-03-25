@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
@@ -23,7 +23,9 @@ const PostSite = () => {
       "Authorization": `Bearer ${token}` 
     },
   }, PostListSchema),
-  enabled: true
+  enabled: true,
+  staleTime: 30000,
+  gcTime: 300000,
   });
   const { t } = useTranslation();
 

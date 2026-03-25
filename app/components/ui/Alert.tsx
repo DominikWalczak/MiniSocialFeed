@@ -3,9 +3,9 @@ import { X } from 'lucide-react'
 
 const Alert = ({ data, onClose }: { data: AlertType; onClose?: () => void }) => {
   const color = {
-    success: 'bg-green-100 border-green-500 text-green-800',
-    error: 'bg-red-100 border-red-500 text-red-800',
-    info: 'bg-blue-100 border-blue-500 text-blue-800',
+    success: 'bg-success-light border-success text-success-dark',
+    error: 'bg-erorr-warning-light border-error-warning text-error-warning-dark',
+    info: 'bg-blue-100 border-primary text-primary-dark',
   };
 
   return (

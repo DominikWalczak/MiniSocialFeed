@@ -9,9 +9,8 @@ const PostItem = ({ post }: { post: PostItemType }) => {
 
   const { t } = useTranslation();
 
-  console.log(post);
   return (
-    <div key={post.id} className="flex-col w-full bg-primary-light rounded-3xl shadow-[rgb(33,113,181)] p-6 hover:shadow-md transition-shadow">
+    <div key={post.id} className="flex-col w-full bg-primary-light rounded-3xl shadow-[primary] p-6 hover:shadow-md transition-shadow">
       <div className="flex justify-between items-center ">
         <div className="flex items-center gap-x-2">
           <Avatar data={{size: "sm", name: post.user.name, vorname: post.user.vorname}}/>

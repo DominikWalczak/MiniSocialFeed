@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import Avatar from "./components/ui/Avatar";
 
 import { useTranslation } from "react-i18next";
@@ -27,6 +28,8 @@ export default function Page() {
         <Avatar data={{size: "sm", name: "Dominik", vorname: "Walczak"}}/>
         {/* <Input id="2" label="Adres email"/> */}
         <Alert data={{text: "text", type: "success"}} onClose={()=>{}}/>
+        <Alert data={{text: "text", type: "error"}} onClose={()=>{}}/>
+        <Alert data={{text: "text", type: "info"}} onClose={()=>{}}/>
         <div className="bg-error-warning text-text-primary-black">
           dasdasd
         </div>

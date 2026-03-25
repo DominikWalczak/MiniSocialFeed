@@ -9,6 +9,7 @@ export async function QueryFetch<T>(url: string, options: object, schema: ZodTyp
     const response = await fetch(url, options);
     if (!response.ok) throw new Error("fetch didn't get the response");
 
+    console.log(1);
     // uzyskanie danych z response
     const json = await response.json();
     
